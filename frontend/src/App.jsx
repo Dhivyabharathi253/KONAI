@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import "./style.css";
 
-const API = "http://127.0.0.1:8000";
+const API = "https://konai-backend.onrender.com";
 
 export default function App() {
   const [dashboard, setDashboard] = useState(null);
