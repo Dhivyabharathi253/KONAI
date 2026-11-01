@@ -1,0 +1,6 @@
+component_type,observation_count,parameters_analyzed,run_to_failure_data,failure_labels,degradation_trend,rul_prediction,rul_unit,prediction_confidence,rul_status,assessment_method,data_source,data_quality
+door,1000,3,Unavailable,Unverified,Exploratory only,,Not established,Not available,Insufficient verified data,RUL feasibility assessment,synthetic,simulated
+motor,1000,2,Unavailable,Unverified,Exploratory only,,Not established,Not available,Insufficient verified data,RUL feasibility assessment,synthetic,simulated
+controller,1000,2,Unavailable,Unverified,Exploratory only,,Not established,Not available,Insufficient verified data,RUL feasibility assessment,synthetic,simulated
+levelling,1000,1,Unavailable,Unverified,Exploratory only,,Not established,Not available,Insufficient verified data,RUL feasibility assessment,synthetic,simulated
+brake,1000,2,Unavailable,Unverified,Exploratory only,,Not established,Not available,Insufficient verified data,RUL feasibility assessment,synthetic,simulated

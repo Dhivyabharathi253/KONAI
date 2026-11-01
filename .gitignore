@@ -20,7 +20,6 @@ dist/
 backend/data/raw/*
 backend/data/processed/*
 backend/data/synthetic/*.csv
-backend/data/reports/*
 
 # Keep empty directories
 !backend/data/raw/.gitkeep
