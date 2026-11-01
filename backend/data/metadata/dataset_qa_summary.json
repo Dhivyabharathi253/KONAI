@@ -1,0 +1,37 @@
+{
+  "huawei_door": {
+    "records": 112001,
+    "columns": [
+      "sample_index",
+      "ball_bearing_revolutions",
+      "humidity_percent",
+      "vibration_db",
+      "ball_bearing_value_reconstructed",
+      "vibration_value_reconstructed"
+    ],
+    "reconstructed_cells": {
+      "ball_bearing_repaired": 535,
+      "humidity_repaired": 0,
+      "vibration_repaired": 5242
+    },
+    "unparseable_values": 0,
+    "confirmed_fault_labels": false,
+    "timestamp_available": false
+  },
+  "traction_elevator": {
+    "records": 1415,
+    "columns": [
+      "source_row",
+      "timestamp",
+      "acceleration",
+      "speed",
+      "vibration"
+    ],
+    "unique_second_resolution_timestamps": 222,
+    "repeated_timestamp_rows": 1193,
+    "distinct_full_measurement_rows": 514,
+    "exact_duplicate_full_rows": 901,
+    "confirmed_fault_labels": false,
+    "units_documented_in_workbook": false
+  }
+}

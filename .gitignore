@@ -1,0 +1,33 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Node
+node_modules/
+dist/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# IDE
+.vscode/
+
+# Generated data
+backend/data/raw/*
+backend/data/processed/*
+backend/data/synthetic/*.csv
+backend/data/reports/*
+
+# Keep empty directories
+!backend/data/raw/.gitkeep
+!backend/data/processed/.gitkeep
+!backend/data/synthetic/.gitkeep
+!backend/data/reports/.gitkeep
+
+# OS files
+.DS_Store
+Thumbs.db

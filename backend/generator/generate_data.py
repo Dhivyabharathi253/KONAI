@@ -1,0 +1,1 @@
+"""Generate synthetic equipment data."""
