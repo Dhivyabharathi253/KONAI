@@ -1,3 +1,5 @@
+import json
+
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -79,6 +81,10 @@ FILES = {
 # ==========================================
 # COMMON DATA READER
 # ==========================================
+
+def clean_records(df):
+    return json.loads(df.to_json(orient="records"))
+
 
 def load_csv(name):
 
@@ -205,59 +211,21 @@ def get_components():
 
 @app.get("/api/anomalies")
 def get_anomalies(
-
-    component: str = Query(
-        default=None
-    ),
-
-    limit: int = Query(
-        default=100,
-        ge=1,
-        le=1000
-    )
-
+    component: str = None,
+    limit: int = 100
 ):
-
     df = load_csv("anomaly")
 
     if component:
+        df = df[df["component_type"].str.lower() == component.lower()]
 
-        df = df[
-            df["component_type"].str.lower()
-            == component.lower()
-        ]
-
-    if "anomaly_label" in df.columns:
-
-        anomalies = df[
-            df["anomaly_label"] == -1
-        ]
-
-    elif "anomaly_status" in df.columns:
-
-        anomalies = df[
-            df["anomaly_status"] == "Anomaly"
-        ]
-
-    else:
-
-        raise HTTPException(
-            status_code=500,
-            detail="Anomaly label column not found."
-        )
+    anomalies = df[df["anomaly_status"].str.lower() == "anomaly"]
 
     return {
-
         "total_anomalies": len(anomalies),
-
         "returned_records": min(len(anomalies), limit),
-
         "data_source": "public_dataset",
-
-        "anomalies": anomalies.head(limit).to_dict(
-            orient="records"
-        )
-
+        "anomalies": clean_records(anomalies.head(limit))
     }
 
 
@@ -266,13 +234,7 @@ def get_anomalies(
 # ==========================================
 
 @app.get("/api/maintenance")
-def get_maintenance(
-
-    priority: str = Query(
-        default=None
-    )
-
-):
+def get_maintenance(priority: str = None):
 
     df = load_csv("maintenance")
 
@@ -289,9 +251,7 @@ def get_maintenance(
 
         "data_source": "synthetic",
 
-        "recommendations": df.to_dict(
-            orient="records"
-        )
+        "recommendations": clean_records(df)
 
     }
 
@@ -302,21 +262,13 @@ def get_maintenance(
 
 @app.get("/api/digital-twin")
 def get_digital_twin():
-
     df = load_csv("digital_twin")
 
     return {
-
         "twin_type": "Simulation-based",
-
         "data_source": "synthetic",
-
         "total_components": len(df),
-
-        "components": df.to_dict(
-            orient="records"
-        )
-
+        "components": clean_records(df)
     }
 
 
@@ -326,21 +278,12 @@ def get_digital_twin():
 
 @app.get("/api/rul")
 def get_rul():
-
     df = load_csv("rul")
 
     return {
-
         "prediction_type": "Feasibility assessment",
-
-        "numerical_predictions_available": int(
-            df["rul_prediction"].notna().sum()
-        ),
-
-        "components": df.to_dict(
-            orient="records"
-        )
-
+        "numerical_predictions_available": int(df["rul_prediction"].notna().sum()),
+        "components": clean_records(df)
     }
 
 
